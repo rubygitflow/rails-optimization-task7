@@ -1,6 +1,7 @@
 gem 'tty-command' # https://github.com/piotrmurach/tty-command
 
 group :development, :test do
+  gem 'dotenv-rails' # https://github.com/bkeepers/dotenv
   gem 'rspec-rails', '~> 4.0.1'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'parallel_tests' # https://github.com/grosser/parallel_tests
