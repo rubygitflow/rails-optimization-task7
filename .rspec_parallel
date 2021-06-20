@@ -1,0 +1,3 @@
+--fail-fast=1 
+--format progress 
+--order rand
