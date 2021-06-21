@@ -3,7 +3,7 @@ LOG_SEPARATOR = '; '
 LOG_FILENAME = 'test_history.log'
 namespace :test do
   desc 'run'
-  task :run, [:init_config, :test_path] => :environment do |_task, args|
+  task :run, [:init_config, :test_path, :limit_cpu_usage] => :environment do |_task, args|
     command = TTY::Command.new(pty: true, printer: :quiet, color: true)
     case args.init_config
     when 'default'
@@ -14,7 +14,8 @@ namespace :test do
     if File.file?(args.test_path)
       cmd = "rspec --fail-fast=1 --format progress #{args.test_path}"
     else
-      cmd = "rake parallel:#{args.test_path}[4]"
+      cmd = "rake parallel:#{args.test_path}"
+      cmd += "[#{args.limit_cpu_usage}]" if !args.limit_cpu_usage.blank?
     end
     start = Time.now
     puts "#{I18n.l(start, format: :simple)}; Running #{cmd}"
